@@ -1,0 +1,36 @@
+USE flight;
+CREATE TABLE flight (
+flight_no INT  PRIMARY KEY  NOT NULL,
+flight_name VARCHAR(50) NOT NULL,
+flight_desc VARCHAR(150) NOT NULL,
+flight_total_capacity INT NOT NULL);
+CREATE TABLE passenger(
+passenger_id INT PRIMARY KEY NOT NULL,
+passenger_name VARCHAR(50) NOT NULL,
+passenger_username VARCHAR(50) NOT NULL,
+passenger_email VARCHAR(50) NOT NULL UNIQUE,
+passenger_password VARCHAR(50) NOT NULL,
+passenger_mobile INT UNIQUE NOT NULL,
+passenger_address VARCHAR(150) NOT NULL,
+passenger_dob DATE);
+ CREATE TABLE flight_schedule(
+ flight_id INT PRIMARY KEY NOT NULL,
+ flight_from VARCHAR(50) NOT NULL,
+ flight_to VARCHAR(50) NOT NULL,
+ flight_date DATE,
+ flight_cost INT NOT NULL,
+ flight_number INT, 
+ FOREIGN KEY (flight_number) REFERENCES flight(flight_no));
+ CREATE TABLE booked_ticket(
+ ticket_number INT UNIQUE NOT NULL,
+ date_of_booking DATE,
+ date_of_travel DATE,
+ flight_number INT, 
+ FOREIGN KEY (flight_number) REFERENCES flight(flight_no),
+ flight_from  VARCHAR(50) NOT NULL,
+ flight_to VARCHAR(50) NOT NULL,
+ flight_time TIME,
+ boarding_time TIME,
+ flight_seat INT NOT NULL,
+passenger_id INT, 
+FOREIGN KEY (passenger_id) REFERENCES passenger(passenger_id));
